@@ -1,0 +1,26 @@
+apply plugin: 'java-library'
+apply plugin: 'eclipse'
+
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+repositories {
+    jcenter()
+}
+
+def jerseyVersion = '2.31'
+
+dependencies {
+	implementation 'javax.ws.rs:javax.ws.rs-api:2.1.1'
+	implementation 'com.fasterxml.jackson.core:jackson-annotations:2.11.1'
+	implementation "org.glassfish.jersey.core:jersey-common:$jerseyVersion"	
+
+	runtimeOnly "org.glassfish.jersey.core:jersey-client:$jerseyVersion"
+	runtimeOnly "org.glassfish.jersey.inject:jersey-hk2:$jerseyVersion"
+	runtimeOnly "org.glassfish.jersey.media:jersey-media-json-jackson:$jerseyVersion"
+  
+    testImplementation 'junit:junit:4.13'
+}
