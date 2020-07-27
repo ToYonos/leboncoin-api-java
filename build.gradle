@@ -17,6 +17,7 @@ dependencies {
 	implementation 'javax.ws.rs:javax.ws.rs-api:2.1.1'
 	implementation 'com.fasterxml.jackson.core:jackson-annotations:2.11.1'
 	implementation "org.glassfish.jersey.core:jersey-common:$jerseyVersion"	
+	implementation "org.glassfish.jersey.media:jersey-media-json-processing:$jerseyVersion"
 
 	runtimeOnly "org.glassfish.jersey.core:jersey-client:$jerseyVersion"
 	runtimeOnly "org.glassfish.jersey.inject:jersey-hk2:$jerseyVersion"
