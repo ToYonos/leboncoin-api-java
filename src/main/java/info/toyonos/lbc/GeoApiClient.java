@@ -11,8 +11,6 @@ import org.glassfish.jersey.jsonp.JsonProcessingFeature;
 /**
  * Client for the API geo.api.gouv.fr
  * @see https://geo.api.gouv.fr/decoupage-administratif/communes
- * @author philippe
- *
  */
 public class GeoApiClient
 {

@@ -13,11 +13,13 @@ public class AdsSearch
 	private int offset;
 	private String owerType;
 	private String sortBy;
-	private String sortOrder;
+	private SortOrder sortOrder;
 
 	private Filters filters;
 	
-	public AdsSearch(int limit, int offset, String owerType, String sortBy, String sortOrder, String keywords, double lat, double lng, int radius)
+	public enum SortOrder { ASC, DESC }
+	
+	public AdsSearch(int limit, int offset, String owerType, String sortBy, SortOrder sortOrder, String keywords, double lat, double lng, int radius)
 	{
 		this.limit = limit;
 		this.offset = offset;
@@ -74,12 +76,12 @@ public class AdsSearch
 		this.sortBy = sortBy;
 	}
 
-	public String getSortOrder()
+	public SortOrder getSortOrder()
 	{
 		return sortOrder;
 	}
 
-	public void setSortOrder(String sortOrder)
+	public void setSortOrder(SortOrder sortOrder)
 	{
 		this.sortOrder = sortOrder;
 	}

@@ -1,8 +1,5 @@
 package info.toyonos.lbc;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.client.ClientBuilder;
@@ -13,9 +10,14 @@ import javax.ws.rs.core.MediaType;
 import org.glassfish.jersey.message.GZipEncoder;
 
 import info.toyonos.lbc.input.AdsSearch;
+import info.toyonos.lbc.input.AdsSearch.SortOrder;
 import info.toyonos.lbc.output.Ad;
 import info.toyonos.lbc.output.SearchResult;
 
+/**
+ * Client for the API from LeBonCoin
+ * @see https://github.com/tdurieux/leboncoin-api
+ */
 public class LeBonCoinClient
 {
 	private static final String ENDPOINT = "https://api.leboncoin.fr";
@@ -24,6 +26,11 @@ public class LeBonCoinClient
 
 	private GeoApiClient geoApiClient;
 	private WebTarget webTarget;
+	
+	static
+	{
+		System.setProperty("sun.net.http.allowRestrictedHeaders", "true");
+	}
 	
 	public LeBonCoinClient()
 	{
@@ -48,7 +55,16 @@ public class LeBonCoinClient
 		.post(Entity.json(input), resultClass);
 	}
 
-	public List<Ad> searchAdvertsByZip(String keywords, String zipCode, int radius, String sortBy, String sortOrder)
+	/**
+	 * Retrieve a <code>List</code> of <code>Ad</code> for the target keywords, in a city with a specified radius
+	 * @param keywords 
+	 * @param zipCode the zip code of the city
+	 * @param radius the radius, in meters, relatively to the center of the city0
+	 * @param sortBy the field on which the sort should be based
+	 * @param sortOrder the type of sort
+	 * @return a <code>List</code> of <code>Ad</code>
+	 */
+	public List<Ad> searchAdvertsByZip(String keywords, String zipCode, int radius, String sortBy, SortOrder sortOrder)
 	{
 		Double[] coordinates = geoApiClient.getGpsCoordinatesFromZip(zipCode);
 		
@@ -60,7 +76,16 @@ public class LeBonCoinClient
 		return searchAdverts(keywords, coordinates, radius, sortBy, sortOrder);
 	}
 	
-	public List<Ad> searchAdvertsByCity(String keywords, String city, int radius, String sortBy, String sortOrder)
+	/**
+	 * Retrieve a <code>List</code> of <code>Ad</code> for the target keywords, in a city with a specified radius
+	 * @param keywords 
+	 * @param zipCode the name of the city
+	 * @param radius the radius, in meters, relatively to the center of the city0
+	 * @param sortBy the field on which the sort should be based
+	 * @param sortOrder the type of sort
+	 * @return a <code>List</code> of <code>Ad</code>
+	 */
+	public List<Ad> searchAdvertsByCity(String keywords, String city, int radius, String sortBy, SortOrder sortOrder)
 	{
 		Double[] coordinates = geoApiClient.getGpsCoordinatesFromCity(city);
 		
@@ -72,7 +97,7 @@ public class LeBonCoinClient
 		return searchAdverts(keywords, coordinates, radius, sortBy, sortOrder);
 	}
 	
-	private List<Ad> searchAdverts(String keywords, Double[] coordinates, int radius, String sortBy, String sortOrder)
+	private List<Ad> searchAdverts(String keywords, Double[] coordinates, int radius, String sortBy, SortOrder sortOrder)
 	{		
 		return doGet(
 			"/finder/search",
@@ -82,19 +107,4 @@ public class LeBonCoinClient
 	}
 	
 	// TODO more methods
-	
-	public static void main(String[] args)
-	{		
-		LeBonCoinClient client = new LeBonCoinClient();
-
-		Date nowMinus1Day = Date.from(LocalDateTime.now().minusDays(1).atZone(ZoneId.systemDefault()).toInstant());
-		client.searchAdvertsByCity("mario kart switch", "nantes", 10000, "date", "desc").stream()
-		.filter(ad -> ad.getFirstPublicationDate().after(nowMinus1Day))
-		.forEach(ad ->
-		{
-			System.out.println(ad.getFirstPublicationDate() + " -> " + ad.getSubject() + " : " + ad.getPrice());
-			System.out.println(ad.getUrl());
-			System.out.println();
-		});
-	}
 }

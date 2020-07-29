@@ -1,3 +1,7 @@
+plugins {
+  id "com.github.johnrengelman.shadow" version "6.0.0"
+}
+
 apply plugin: 'java-library'
 apply plugin: 'eclipse'
 
@@ -24,4 +28,11 @@ dependencies {
 	runtimeOnly "org.glassfish.jersey.media:jersey-media-json-jackson:$jerseyVersion"
   
     testImplementation 'junit:junit:4.13'
+}
+
+shadowJar {
+   baseName = 'lbc'
+   manifest {
+        attributes('Main-Class': 'info.toyonos.lbc.LeBonCoinAlertManager')
+    }
 }

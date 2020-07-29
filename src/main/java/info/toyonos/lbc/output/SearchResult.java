@@ -1,6 +1,7 @@
 
 package info.toyonos.lbc.output;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -217,7 +218,7 @@ public class SearchResult
 	@JsonProperty("ads")
 	public List<Ad> getAds()
 	{
-		return ads;
+		return ads == null ? Collections.emptyList() : ads;
 	}
 
 	@JsonProperty("ads")

@@ -40,11 +40,11 @@ public class Ad
 	private Integer listId;
 
 	@JsonProperty("first_publication_date")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Ad.DATE_FORMAT)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Ad.DATE_FORMAT, timezone = "Europe/Paris")
 	private Date firstPublicationDate;
 
 	@JsonProperty("index_date")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Ad.DATE_FORMAT)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Ad.DATE_FORMAT, timezone = "Europe/Paris")
 	private Date indexDate;
 
 	@JsonProperty("status")
@@ -93,7 +93,7 @@ public class Ad
 	private Boolean hasPhone;
 
 	@JsonProperty("expiration_date")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Ad.DATE_FORMAT)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Ad.DATE_FORMAT, timezone = "Europe/Paris")
 	private Date expirationDate;
 
 	public Ad()
