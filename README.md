@@ -1,4 +1,4 @@
-## A simple Java client for the LeBonCoin API
+## A simple Java client for LeBonCoin API
 
 It's based on the work done by tdurieux and his [Javascript client](https://github.com/tdurieux/leboncoin-api)
 
