@@ -3,7 +3,6 @@ package info.toyonos.lbc.handler;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.stream.Stream;
 
 import info.toyonos.lbc.output.Ad;
 
@@ -20,8 +19,8 @@ public class AdCreationFilter implements AdsFilter
 	}
 
 	@Override
-	public Stream<Ad> filter(Stream<Ad> ads)
+	public boolean test(Ad ad)
 	{
-		return ads.filter(ad -> ad.getFirstPublicationDate().after(pastDate));
+		return ad.getFirstPublicationDate().after(pastDate);
 	}
 }

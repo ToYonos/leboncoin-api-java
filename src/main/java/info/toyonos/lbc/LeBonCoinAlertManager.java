@@ -29,7 +29,7 @@ public class LeBonCoinAlertManager
 				Stream<Ad> adsStream = client.searchAdvertsByCity(args[i], city, radius, "date", SortOrder.DESC).stream();
 				for (AdsFilter filter : adsFilters)
 				{
-					adsStream = filter.filter(adsStream);
+					adsStream = adsStream.filter(filter);
 				}
 				finisher.handle(adsStream);
 			}

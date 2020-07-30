@@ -1,13 +1,12 @@
 package info.toyonos.lbc.handler;
 
-import java.util.stream.Stream;
+import java.util.function.Predicate;
 
 import info.toyonos.lbc.output.Ad;
 
 /**
- * A filter for reducing a <code>Stream</code> of <code>Ad</code> from LeBonCoin API
+ * A filter for keeping an <code>Ad</code> or not from LeBonCoin API
  */
-public interface AdsFilter
+public interface AdsFilter extends Predicate<Ad>
 {
-	public Stream<Ad> filter(Stream<Ad> ads);
 }
