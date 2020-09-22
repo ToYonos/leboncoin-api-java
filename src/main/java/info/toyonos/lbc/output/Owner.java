@@ -1,12 +1,14 @@
 
 package info.toyonos.lbc.output;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "store_id", "user_id", "type", "name", "no_salesmen", "siren", "pro_rates_link"})
+@JsonIgnoreProperties({"activity_sector"})
 public class Owner
 {
 	@JsonProperty("store_id")
